@@ -8,6 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -19,12 +20,12 @@ public class FileSystemStorage {
 
     public <T> List<T> findAll(String fileLocation, Class<T> clazz) throws StorageException {
         try {
-            final File file = new ClassPathResource(fileLocation)
-                    .getFile();
+            final InputStream inputStream = new ClassPathResource(fileLocation)
+                    .getInputStream();
 
             final TypeFactory typeFactory = objectMapper.getTypeFactory();
             return objectMapper.readValue(
-                    file,
+                    inputStream,
                     typeFactory.constructCollectionType(List.class, clazz)
             );
         } catch (Exception e) {
