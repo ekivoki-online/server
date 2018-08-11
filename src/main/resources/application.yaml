@@ -1,0 +1,5 @@
+ekivoki:
+  common-cards:
+    location: "common-cards.json"
+  ekivoki-cards:
+    location: "ekivoki-cards.json"
